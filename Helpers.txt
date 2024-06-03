@@ -1,0 +1,30 @@
+------------------------------------ Application Ports ------------------------------------
+Keycloak                     : http://localhost:4000;
+InventoryManagement.API      : http://localhost:4001;
+InventoryManagement.Frontend : https://localhost:4002;
+EmailService.API             : http://localhost:4004;
+------------------------------------ Application Ports ------------------------------------
+
+
+
+------------------------------------ Docker container backup/restore ------------------------------------
+Powershell : docker login
+Backup     : docker cp 0776f15b9409:/var/opt/mssql/data/KeycloakDb_log.ldf C:\Database
+Restore    : docker cp "C:/Users/malfx001/Desktop/Yeni Disk/Programlama/Workshop/Database/Keycloak/KeycloakDb.mdf" 6b01fe1fee98:/var/opt/mssql/data/
+------------------------------------ Docker container backup/restore ------------------------------------
+
+
+------------------------------------ Migrations - Persistence Layer ------------------------------------
+Migrate: dotnet ef migrations add InitialCreate --context ApplicationDbContext
+Update : dotnet ef database update --context ApplicationDbContext
+Remove : dotnet ef migrations remove --force --context ApplicationDbContext
+------------------------------------ Migrations - Persistence Layer ------------------------------------
+
+
+
+------------------------------------ Dockerfile - Test Run ------------------------------------
+InventoryManagement.Frontend
+Command: docker build -t inventory.management-frontend .
+Command: docker run -d -p 4004:4004 inventory.management.frontend
+Command: docker-compose up --build
+------------------------------------ Dockerfile - Test Run ------------------------------------
