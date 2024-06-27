@@ -57,7 +57,7 @@ builder.Services.AddCap(x =>
     x.UseSqlServer(builder.Configuration.GetConnectionString("CapLogSqlServerConnection"));
     x.UseRabbitMQ(options =>
     {
-        options.ExchangeName = "DentalManagement.API";
+        options.ExchangeName = "MosasWeb.API";
         options.BasicQosOptions = new DotNetCore.CAP.RabbitMQOptions.BasicQos(3);
         options.ConnectionFactoryOptions = opt =>
         {
@@ -135,74 +135,11 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 builder.Services.AddTransient<IClaimsTransformation>(_ => new KeycloakRolesClaimsTransformation("role", keycloakSettings.Audience));
 builder.Services.AddAuthorization(options =>
 {
-    #region Company
-    options.AddPolicy("CompanyReadRole", builder => { builder.AddRequirements(new RptRequirement("res:company", "scopes:read")); });
-    options.AddPolicy("CompanyCreateRole", builder => { builder.AddRequirements(new RptRequirement("res:company", "scopes:create")); });
-    options.AddPolicy("CompanyUpdateRole", builder => { builder.AddRequirements(new RptRequirement("res:company", "scopes:update")); });
-    options.AddPolicy("CompanyDeleteRole", builder => { builder.AddRequirements(new RptRequirement("res:company", "scopes:delete")); });
-    #endregion
-
-    #region Category
-    options.AddPolicy("CategoryReadRole", builder => { builder.AddRequirements(new RptRequirement("res:category", "scopes:read")); });
-    options.AddPolicy("CategoryCreateRole", builder => { builder.AddRequirements(new RptRequirement("res:category", "scopes:create")); });
-    options.AddPolicy("CategoryUpdateRole", builder => { builder.AddRequirements(new RptRequirement("res:category", "scopes:update")); });
-    options.AddPolicy("CategoryDeleteRole", builder => { builder.AddRequirements(new RptRequirement("res:category", "scopes:delete")); });
-    #endregion
-
-    #region CategorySub
-    options.AddPolicy("CategorySubReadRole", builder => { builder.AddRequirements(new RptRequirement("res:categorysub", "scopes:read")); });
-    options.AddPolicy("CategorySubCreateRole", builder => { builder.AddRequirements(new RptRequirement("res:categorysub", "scopes:create")); });
-    options.AddPolicy("CategorySubUpdateRole", builder => { builder.AddRequirements(new RptRequirement("res:categorysub", "scopes:update")); });
-    options.AddPolicy("CategorySubDeleteRole", builder => { builder.AddRequirements(new RptRequirement("res:categorysub", "scopes:delete")); });
-    #endregion
-
-    #region Brand Permissions
-    options.AddPolicy("BrandReadRole", builder => { builder.AddRequirements(new RptRequirement("res:brand", "scopes:read")); });
-    options.AddPolicy("BrandCreateRole", builder => { builder.AddRequirements(new RptRequirement("res:brand", "scopes:create")); });
-    options.AddPolicy("BrandUpdateRole", builder => { builder.AddRequirements(new RptRequirement("res:brand", "scopes:update")); });
-    options.AddPolicy("BrandDeleteRole", builder => { builder.AddRequirements(new RptRequirement("res:brand", "scopes:delete")); });
-    #endregion
-
-    #region Model Permissions
-    //options.AddPolicy("ModelReadRole", builder => { builder.AddRequirements(new RptRequirement("res:model", "scopes:read")); });
-    options.AddPolicy("ModelCreateRole", builder => { builder.AddRequirements(new RptRequirement("res:model", "scopes:create")); });
-    options.AddPolicy("ModelUpdateRole", builder => { builder.AddRequirements(new RptRequirement("res:model", "scopes:update")); });
-    options.AddPolicy("ModelDeleteRole", builder => { builder.AddRequirements(new RptRequirement("res:model", "scopes:delete")); });
-    #endregion
-
-    #region Inventory
-    options.AddPolicy("ProductReadRole", builder => { builder.AddRequirements(new RptRequirement("res:product", "scopes:read")); });
-    options.AddPolicy("ProductCreateRole", builder => { builder.AddRequirements(new RptRequirement("res:product", "scopes:create")); });
-    options.AddPolicy("ProductUpdateRole", builder => { builder.AddRequirements(new RptRequirement("res:product", "scopes:update")); });
-    options.AddPolicy("ProductDeleteRole", builder => { builder.AddRequirements(new RptRequirement("res:product", "scopes:delete")); });
-    #endregion
-
-    #region AssignedProduct
-    options.AddPolicy("AssignedProductReadRole", builder => { builder.AddRequirements(new RptRequirement("res:assignedproduct", "scopes:read")); });
-    options.AddPolicy("AssignedProductCreateRole", builder => { builder.AddRequirements(new RptRequirement("res:assignedproduct", "scopes:create")); });
-    options.AddPolicy("AssignedProductUpdateRole", builder => { builder.AddRequirements(new RptRequirement("res:assignedproduct", "scopes:update")); });
-    #endregion
-
-    #region TransferOfficier
-    options.AddPolicy("TransferOfficierReadRole", builder => { builder.AddRequirements(new RptRequirement("res:transferofficier", "scopes:read")); });
-    options.AddPolicy("TransferOfficierCreateRole", builder => { builder.AddRequirements(new RptRequirement("res:transferofficier", "scopes:create")); });
-    options.AddPolicy("TransferOfficierUpdateRole", builder => { builder.AddRequirements(new RptRequirement("res:transferofficier", "scopes:update")); });
-    options.AddPolicy("TransferOfficierDeleteRole", builder => { builder.AddRequirements(new RptRequirement("res:transferofficier", "scopes:delete")); });
-    #endregion
-
-    #region Report
-    options.AddPolicy("ReportReadRole", builder => { builder.AddRequirements(new RptRequirement("res:report", "scopes:read")); });
-    options.AddPolicy("ReportCreateRole", builder => { builder.AddRequirements(new RptRequirement("res:report", "scopes:create")); });
-    #endregion
-
-    #region TransferOfficier
-    options.AddPolicy("FileTransferCreateRole", builder => { builder.AddRequirements(new RptRequirement("res:filetransfer", "scopes:create")); });
-    #endregion
-
-    #region File Transfer
-    options.AddPolicy("FileTransferReadRole", builder => { builder.AddRequirements(new RptRequirement("res:filetransfer", "scopes:read")); });
-    options.AddPolicy("FileTransferCreateRole", builder => { builder.AddRequirements(new RptRequirement("res:filetransfer", "scopes:create")); });
-    options.AddPolicy("FileTransferDeleteRole", builder => { builder.AddRequirements(new RptRequirement("res:filetransfer", "scopes:delete")); });
+    #region KKC
+    options.AddPolicy("KKCReadRole", builder => { builder.AddRequirements(new RptRequirement("res:kkc", "scopes:read")); });
+    options.AddPolicy("KKCCreateRole", builder => { builder.AddRequirements(new RptRequirement("res:kkc", "scopes:create")); });
+    options.AddPolicy("KKCUpdateRole", builder => { builder.AddRequirements(new RptRequirement("res:kkc", "scopes:update")); });
+    options.AddPolicy("KKCDeleteRole", builder => { builder.AddRequirements(new RptRequirement("res:kkc", "scopes:delete")); });
     #endregion
 });
 
@@ -247,7 +184,7 @@ builder.Services.AddScoped<IAuthorizationHandler, RptRequirementHandler>();
 #endregion
 
 
-
+#region RateLimit - Ex
 //builder.Services.AddRateLimiter(options =>
 //{
 //    options.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
@@ -272,6 +209,7 @@ builder.Services.AddScoped<IAuthorizationHandler, RptRequirementHandler>();
 //        }
 //    });
 //});
+#endregion
 
 builder.Services.AddDistributedMemoryCache();
 

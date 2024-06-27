@@ -31,7 +31,7 @@ namespace Persistence.Context
         }
 
 
-        public DbSet<Company> Companies { get; set; }
+        //public DbSet<Company> Companies { get; set; }
 
 
 

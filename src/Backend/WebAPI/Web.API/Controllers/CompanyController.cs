@@ -1,4 +1,5 @@
-﻿using Application.Features.Companies.Commands.CreateCompany;
+﻿
+using Application.Features.Companies.Commands.CreateCompany;
 using Application.Features.Companies.Commands.DeleteCompany;
 using Application.Features.Companies.Commands.UpdateCompany;
 using Application.Features.Companies.Queries.CompanyAllList;
@@ -55,7 +56,7 @@ namespace Web.API.Controllers
         /// <param name="id">The id of the company to delete. Type: int</param>
         /// <returns>A Task that represents the asynchronous operation. The task result contains a Result of NoContent.</returns>
         //[Authorize("CompanyDeleteRole")]
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}")]                              //DeleteCompanyCommand
         public async Task<ActionResult<Result<NoContent>>> DeleteCompanyCommand(int id)
         {
             await _mediator.Send(new DeleteCompanyCommand(id));
